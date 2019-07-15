@@ -1,6 +1,6 @@
 package com.king.oliver.writerschedulegenerator.services.springjpa;
 
-import com.king.oliver.writerschedulegenerator.domain.Writer;
+import com.king.oliver.writerschedulegenerator.model.Writer;
 import com.king.oliver.writerschedulegenerator.repositories.WriterRepository;
 import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.stereotype.Service;
