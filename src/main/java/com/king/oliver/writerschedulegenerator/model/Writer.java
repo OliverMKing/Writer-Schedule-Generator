@@ -13,6 +13,9 @@ public class Writer extends Person{
     @Column(name = "url")
     private String url;
 
+    public Writer() {
+    }
+
     public Writer(String name, String url) {
         super(name);
         this.url = url;
