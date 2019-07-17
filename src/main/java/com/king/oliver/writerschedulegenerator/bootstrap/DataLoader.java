@@ -1,6 +1,8 @@
 package com.king.oliver.writerschedulegenerator.bootstrap;
 
+import com.king.oliver.writerschedulegenerator.model.Editor;
 import com.king.oliver.writerschedulegenerator.model.Writer;
+import com.king.oliver.writerschedulegenerator.services.EditorService;
 import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -9,9 +11,11 @@ import org.springframework.stereotype.Component;
 public class DataLoader implements CommandLineRunner {
 
     private final WriterService writerService;
+    private final EditorService editorService;
 
-    public DataLoader(WriterService writerService) {
+    public DataLoader(WriterService writerService, EditorService editorService) {
         this.writerService = writerService;
+        this.editorService = editorService;
     }
 
     @Override
@@ -32,5 +36,11 @@ public class DataLoader implements CommandLineRunner {
 
         Writer stephane = new Writer("Stephane Ivanoff", "https://www.pokebeach.com/forums/members/lubyllule.117481/");
         writerService.save(stephane);
+
+        Editor oliver = new Editor("Oliver King");
+        editorService.save(oliver);
+
+        Editor sam = new Editor("Sam VerNooy");
+        editorService.save(sam);
     }
 }
