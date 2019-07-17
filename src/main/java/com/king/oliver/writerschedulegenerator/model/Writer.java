@@ -6,10 +6,6 @@ import javax.persistence.*;
 @Table(name = "writers")
 public class Writer extends Person{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @Column(name = "url")
     private String url;
 
