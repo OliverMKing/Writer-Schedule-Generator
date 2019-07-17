@@ -20,19 +20,17 @@
 </div>
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">List of Writers</h1>
+    <h1 class="display-4">List of Editors</h1>
 
     <table class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;">Name</th>
-            <th style="width: 150px;">Url</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="writer : ${writers}">
-            <td th:text="${writer.getName()}">Caleb</td>
-            <td th:text="${writer.getUrl()}">www.example.com</td>
+        <tr th:each="editor : ${editors}">
+            <td th:text="${editor.getName()}">Caleb</td>
         </tr>
         </tbody>
     </table>
