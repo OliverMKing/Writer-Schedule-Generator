@@ -36,7 +36,7 @@ public class EditorControllerTest {
     private Set<Editor> editors;
 
     @Before
-    public void setUp(   ) throws Exception {
+    public void setUp() throws Exception {
 
         editors = new HashSet<>();
         Editor oliver = new Editor("Oliver King");

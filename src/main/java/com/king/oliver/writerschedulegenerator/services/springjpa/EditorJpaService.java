@@ -44,4 +44,9 @@ public class EditorJpaService implements EditorService {
     public void deleteById(Long aLong) {
         editorRepository.deleteById(aLong);
     }
+
+    @Override
+    public Editor findByName(String name) {
+        return editorRepository.findByName(name);
+    }
 }

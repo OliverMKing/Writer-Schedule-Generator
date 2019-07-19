@@ -44,4 +44,9 @@ public class WriterJpaService implements WriterService {
     public void deleteById(Long aLong) {
         writerRepository.deleteById(aLong);
     }
+
+    @Override
+    public Writer findByName(String name) {
+        return writerRepository.findByName(name);
+    }
 }
