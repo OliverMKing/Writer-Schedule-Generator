@@ -31,10 +31,9 @@ public class EditorControllerTest {
     @InjectMocks
     EditorController editorController;
 
-    MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-    Set<Editor> editors;
-
+    private Set<Editor> editors;
 
     @Before
     public void setUp(   ) throws Exception {
