@@ -4,21 +4,19 @@ import com.king.oliver.writerschedulegenerator.model.Editor;
 import com.king.oliver.writerschedulegenerator.services.EditorService;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.Model;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -61,6 +59,6 @@ public class EditorControllerTest {
         mockMvc.perform(get("/editor"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("editor/index"))
-                .andExpect(model().attributeExists("editors"));
+                .andExpect(model().attribute("editors", equalTo(editors)));
     }
 }
