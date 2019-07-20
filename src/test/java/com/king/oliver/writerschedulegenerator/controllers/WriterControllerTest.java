@@ -17,6 +17,7 @@ import java.util.Set;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -33,12 +34,14 @@ public class WriterControllerTest {
     private MockMvc mockMvc;
 
     private Set<Writer> writers;
+    private Writer writer;
 
     @Before
     public void setUp() throws Exception {
         writers = new HashSet<>();
         Writer caleb = new Writer("Caleb Gedemer", "https://www.pokebeach.com/author/caleb-gedemer");
         writers.add(caleb);
+        writer = caleb;
         Writer grant = new Writer("Grant Manley", "https://www.pokebeach.com/author/grant-manley");
         writers.add(grant);
         Writer stephane = new Writer("Stephane Ivanoff", "https://www.pokebeach.com/forums/members/lubyllule.117481/");
@@ -52,12 +55,21 @@ public class WriterControllerTest {
 
     @Test
     public void listWriters() throws Exception {
-
         when(writerService.findAll()).thenReturn(writers);
 
         mockMvc.perform(get("/writer"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("writer/index"))
                 .andExpect(model().attribute("writers", equalTo(writers)));
+    }
+
+    @Test
+    public void showWriter() throws Exception {
+        when(writerService.findById(anyLong())).thenReturn(writer);
+
+        mockMvc.perform(get("/writer/1"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("writer/show"))
+                .andExpect(model().attribute("writer", equalTo(writer)));
     }
 }
