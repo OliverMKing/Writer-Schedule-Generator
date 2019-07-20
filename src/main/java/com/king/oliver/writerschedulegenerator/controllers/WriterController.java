@@ -2,7 +2,6 @@ package com.king.oliver.writerschedulegenerator.controllers;
 
 import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +18,11 @@ public class WriterController {
     }
 
     @RequestMapping({"", "/"})
-    public String listWriters(Model model) {
+    public ModelAndView listWriters() {
 
-        model.addAttribute("writers", writerService.findAll());
-        return "writer/index";
+        ModelAndView mav = new ModelAndView("writer/index");
+        mav.addObject("writers", writerService.findAll());
+        return mav;
     }
 
     @GetMapping("/{writerId}")

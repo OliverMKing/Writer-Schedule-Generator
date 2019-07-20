@@ -1,10 +1,9 @@
 package com.king.oliver.writerschedulegenerator.controllers;
 
-import com.king.oliver.writerschedulegenerator.repositories.EditorRepository;
 import com.king.oliver.writerschedulegenerator.services.EditorService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/editor")
@@ -17,9 +16,10 @@ public class EditorController {
     }
 
     @RequestMapping({"", "/"})
-    public String showEditors(Model model) {
+    public ModelAndView showEditors() {
 
-        model.addAttribute("editors", editorService.findAll());
-        return "editor/index";
+        ModelAndView mav = new ModelAndView("editor/index");
+        mav.addObject("editors", editorService.findAll());
+        return mav;
     }
 }
