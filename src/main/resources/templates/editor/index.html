@@ -16,12 +16,14 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th style="width: 150px;">Name</th>
+                <th>Name</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="editor : ${editors}">
-                <td th:text="${editor.getName()}">Caleb</td>
+                <td th:text="${editor.getName()}">Oliver</td>
+                <td><a href="#" th:href="@{'/editor/' + ${editor.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this editor?')">Delete</a></td>
             </tr>
             </tbody>
         </table>
