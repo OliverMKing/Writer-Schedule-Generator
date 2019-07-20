@@ -14,7 +14,7 @@
     <h1 class="display-4" th:text="${writer.getName()}">List of Writers</h1>
 
     <p><a href="#" th:href="@{${writer.getUrl()}}" th:text="${writer.getUrl()}">www.example.com</a></p>
-    <a href="#" th:href="@{'/writer/' + ${writer.getId()} + '/delete'}">Delete</a>
+    <a href="#" th:href="@{'/writer/' + ${writer.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this writer?')">Delete</a>
 </div>
 </body>
 </html>
