@@ -16,14 +16,16 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th style="width: 150px;">Name</th>
-                <th style="width: 150px;">Url</th>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Link</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="writer : ${writers}">
                 <td th:text="${writer.getName()}">Caleb</td>
-                <td th:text="${writer.getUrl()}">www.example.com</td>
+                <td><a href="#" th:href="@{${writer.getUrl()}}" th:text="${writer.getUrl()}">www.example.com</a></td>
+                <td><a href="#" th:href="@{'/writer/' + ${writer.getId()}}">Show</a></td>
             </tr>
             </tbody>
         </table>

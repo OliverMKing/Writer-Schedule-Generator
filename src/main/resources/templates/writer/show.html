@@ -13,7 +13,7 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4" th:text="${writer.getName()}">List of Writers</h1>
 
-    <p th:text="${'URL: ' + writer.getUrl()}"></p>
+    <p><a href="#" th:href="@{${writer.getUrl()}}" th:text="${writer.getUrl()}">www.example.com</a></p>
     <a href="#" th:href="@{'/writer/' + ${writer.getId()} + '/delete'}">Delete</a>
 </div>
 </body>
