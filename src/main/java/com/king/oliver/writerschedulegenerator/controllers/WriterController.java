@@ -32,4 +32,11 @@ public class WriterController {
         mav.addObject("writer", writerService.findById(writerId));
         return mav;
     }
+
+    @GetMapping("/{writerId}/delete")
+    public String deleteWriter(@PathVariable Long writerId) {
+
+        writerService.deleteById(writerId);
+        return "redirect:/writer";
+    }
 }
