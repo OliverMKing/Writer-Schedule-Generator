@@ -1,11 +1,15 @@
 package com.king.oliver.writerschedulegenerator.controllers;
 
+import com.king.oliver.writerschedulegenerator.model.Writer;
 import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
+import java.security.acl.Owner;
 
 @Controller
 @RequestMapping("/writer")
@@ -38,5 +42,27 @@ public class WriterController {
 
         writerService.deleteById(writerId);
         return "redirect:/writer";
+    }
+
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("id");
+    }
+
+    @GetMapping("/new")
+    public ModelAndView initCreateWriter() {
+        ModelAndView mav = new ModelAndView("writer/newOrUpdate");
+        mav.addObject("writer", new Writer());
+        return mav;
+    }
+
+    @PostMapping("/new")
+    public ModelAndView postCreateWriter(@Valid Writer writer, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ModelAndView("writer/newOrUpdate");
+        } else {
+            Writer saved = writerService.save(writer);
+            return new ModelAndView("redirect:" + saved.getId());
+        }
     }
 }
