@@ -2,11 +2,13 @@ package com.king.oliver.writerschedulegenerator.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
 
 @MappedSuperclass
 public class Person extends BaseEntity {
 
     @Column(name = "name")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
     public Person() {

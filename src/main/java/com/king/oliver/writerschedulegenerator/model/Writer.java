@@ -1,5 +1,7 @@
 package com.king.oliver.writerschedulegenerator.model;
 
+import org.hibernate.validator.constraints.URL;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,6 +9,7 @@ import javax.persistence.*;
 public class Writer extends Person{
 
     @Column(name = "url")
+    @URL(message = "Url must be valid (with protocol specified)")
     private String url;
 
     public Writer() {
