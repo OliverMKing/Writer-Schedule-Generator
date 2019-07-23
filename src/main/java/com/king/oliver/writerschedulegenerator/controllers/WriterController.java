@@ -73,7 +73,10 @@ public class WriterController {
     @PostMapping("/{writerId}/update")
     public ModelAndView postUpdateWriter(@Valid Writer writer, BindingResult result, @PathVariable Long writerId) {
         if (result.hasErrors()) {
-            return new ModelAndView("writer/update");
+            ModelAndView mav = new ModelAndView("writer/update");
+            writer.setId(writerId);
+            mav.addObject(writer);
+            return mav;
         } else {
             writer.setId(writerId);
             Writer saved = writerService.save(writer);

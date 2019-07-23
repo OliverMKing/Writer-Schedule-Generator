@@ -43,7 +43,7 @@ public class EditorController {
     @GetMapping("/new")
     public ModelAndView initCreateEditor() {
         ModelAndView mav = new ModelAndView("editor/new");
-        mav.addObject(new Editor());
+        mav.addObject("editor", new Editor());
         return mav;
     }
 
@@ -54,6 +54,27 @@ public class EditorController {
         } else {
             Editor saved = editorService.save(editor);
             return new ModelAndView("redirect:");
+        }
+    }
+
+    @GetMapping("/{editorId}/update")
+    public ModelAndView initUpdateEditor(@PathVariable Long editorId) {
+        ModelAndView mav = new ModelAndView("editor/update");
+        mav.addObject("editor", editorService.findById(editorId));
+        return mav;
+    }
+
+    @PostMapping("/{editorId}/update")
+    public ModelAndView postUpdateEditor(@Valid Editor editor, BindingResult result, @PathVariable Long editorId) {
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("editor/update");
+            editor.setId(editorId);
+            mav.addObject(editor);
+            return mav;
+        } else {
+            editor.setId(editorId);
+            Editor saved = editorService.save(editor);
+            return new ModelAndView("redirect:/editor");
         }
     }
 }

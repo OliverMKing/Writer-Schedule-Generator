@@ -18,12 +18,14 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="editor : ${editors}">
                 <td th:text="${editor.getName()}">Oliver</td>
+                <td><a href="#" th:href="@{'/editor/' + ${editor.getId()} + '/update'}")>Edit</a></td>
                 <td><a href="#" th:href="@{'/editor/' + ${editor.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this editor?')">Delete</a></td>
             </tr>
             </tbody>
