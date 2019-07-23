@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -21,6 +22,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -69,5 +71,26 @@ public class EditorControllerTest {
                 .andExpect(view().name("redirect:/editor"));
 
         verify(editorService, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void initCreateEditor() throws Exception{
+        mockMvc.perform(get("/editor/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("editor/new"))
+                .andExpect(model().attributeExists("editor"));
+    }
+
+    @Test
+    public void postCreateEditor() throws Exception {
+        Editor editor = new Editor();
+        editor.setId(1L);
+        when(editorService.save(any())).thenReturn(editor);
+
+        mockMvc.perform(post("/editor/new")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+                .param("name", "Test"))
+                .andExpect(status().is3xxRedirection());
     }
 }
