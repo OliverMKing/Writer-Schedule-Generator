@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -80,5 +82,49 @@ public class WriterControllerTest {
                 .andExpect(view().name("redirect:/writer"));
 
         verify(writerService, times(1)).deleteById(anyLong());
+    }
+
+    @Test
+    public void initCreateWriter() throws Exception{
+        mockMvc.perform(get("/writer/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("writer/new"))
+                .andExpect(model().attributeExists("writer"));
+    }
+
+    @Test
+    public void postCreateWriter() throws Exception {
+        writer.setId(1L);
+        when(writerService.save(any())).thenReturn(writer);
+
+        mockMvc.perform(post("/writer/new")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+                .param("name", "Test"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    public void initUpdateWriter() throws Exception {
+
+        Writer writer = new Writer();
+        when(writerService.findById(anyLong())).thenReturn(writer);
+
+        mockMvc.perform(get("/writer/1/update"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("writer/update"))
+                .andExpect(model().attributeExists("writer"));
+    }
+
+    @Test
+    public void postUpdateWriter() throws Exception {
+        writer.setId(1L);
+        when(writerService.save(any())).thenReturn(writer);
+
+        mockMvc.perform(post("/writer/1/update")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+                .param("name", "New"))
+                .andExpect(status().is3xxRedirection());
     }
 }
