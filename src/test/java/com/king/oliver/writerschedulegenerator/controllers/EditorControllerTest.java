@@ -93,4 +93,28 @@ public class EditorControllerTest {
                 .param("name", "Test"))
                 .andExpect(status().is3xxRedirection());
     }
+
+    @Test
+    public void initUpdateEditor() throws Exception {
+        Editor editor = new Editor();
+        when(editorService.findById(anyLong())).thenReturn(editor);
+
+        mockMvc.perform(get("/editor/1/update"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("editor/update"))
+                .andExpect(model().attributeExists("editor"));
+    }
+
+    @Test
+    public void postUpdateEditor() throws Exception {
+        Editor editor = new Editor();
+        editor.setId(1L);
+        when(editorService.save(any())).thenReturn(editor);
+
+        mockMvc.perform(post("/editor/1/update")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("id", "")
+                .param("name", "New"))
+                .andExpect(status().is3xxRedirection());
+    }
 }
