@@ -5,16 +5,16 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 
 @MappedSuperclass
-public class Person extends BaseEntity {
+public class Named extends BaseEntity {
 
     @Column(name = "name")
     @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    public Person() {
+    public Named() {
     }
 
-    public Person(String name) {
+    public Named(String name) {
         this.name = name;
     }
 

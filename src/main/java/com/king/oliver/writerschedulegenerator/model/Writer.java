@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "writers")
-public class Writer extends Person{
+public class Writer extends Named {
 
     @Column(name = "url")
     @URL(message = "Url must be valid (with protocol specified)")

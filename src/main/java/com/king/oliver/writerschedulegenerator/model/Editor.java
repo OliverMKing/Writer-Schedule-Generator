@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "editors")
-public class Editor extends Person {
+public class Editor extends Named {
 
     public Editor() {
     }
