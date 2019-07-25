@@ -1,13 +1,11 @@
 package com.king.oliver.writerschedulegenerator.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "slots")
-public class Slot extends BaseEntity {
+public class Slot extends BaseEntity implements Comparable<Slot> {
 
     @Column(name = "date")
     private LocalDate date;
@@ -17,6 +15,10 @@ public class Slot extends BaseEntity {
 
     @Column(name = "editor")
     private Editor editor;
+
+    @ManyToOne
+    @JoinColumn(name = "schedule_id")
+    private Schedule schedule;
 
     public Slot() {
     }
@@ -58,5 +60,10 @@ public class Slot extends BaseEntity {
 
     public void setEditor(Editor editor) {
         this.editor = editor;
+    }
+
+    @Override
+    public int compareTo(Slot o) {
+        return date.compareTo(o.getDate());
     }
 }
