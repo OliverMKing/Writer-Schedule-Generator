@@ -53,9 +53,9 @@ public class DataLoader implements CommandLineRunner {
         LocalDate now = LocalDate.now();
         Schedule schedule = new Schedule();
         schedule.setName("January");
-        schedule.addSlot(new Slot(now, caleb, oliver));
-        schedule.addSlot(new Slot(now, grant, sam));
-        schedule.addSlot(new Slot(now, stephane, oliver));
+        schedule = schedule.addSlot(new Slot(now, caleb, oliver));
+        schedule = schedule.addSlot(new Slot(now, grant, sam));
+        schedule = schedule.addSlot(new Slot(now, stephane, oliver));
         scheduleService.save(schedule);
     }
 }

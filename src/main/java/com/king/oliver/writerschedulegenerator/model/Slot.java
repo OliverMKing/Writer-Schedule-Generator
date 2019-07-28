@@ -2,6 +2,7 @@ package com.king.oliver.writerschedulegenerator.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "slots")
@@ -73,5 +74,21 @@ public class Slot extends BaseEntity implements Comparable<Slot> {
     @Override
     public int compareTo(Slot o) {
         return date.compareTo(o.getDate());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Slot slot = (Slot) o;
+        return Objects.equals(date, slot.date) &&
+                Objects.equals(writer, slot.writer) &&
+                Objects.equals(editor, slot.editor) &&
+                Objects.equals(schedule, slot.schedule);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(date, writer, editor, schedule);
     }
 }
