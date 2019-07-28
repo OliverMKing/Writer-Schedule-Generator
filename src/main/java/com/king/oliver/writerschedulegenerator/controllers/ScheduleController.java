@@ -33,6 +33,12 @@ public class ScheduleController {
         return mav;
     }
 
+    @GetMapping("/{scheduleId}/delete")
+    public String deleteSchedule(@PathVariable Long scheduleId) {
+        scheduleService.deleteById(scheduleId);
+        return "redirect:/schedule";
+    }
+
     @GetMapping("/new")
     public ModelAndView initCreateSchedule() {
         ModelAndView mav = new ModelAndView("schedule/new");
