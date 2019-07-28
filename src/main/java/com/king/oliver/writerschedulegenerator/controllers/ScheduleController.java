@@ -3,10 +3,14 @@ package com.king.oliver.writerschedulegenerator.controllers;
 import com.king.oliver.writerschedulegenerator.model.Schedule;
 import com.king.oliver.writerschedulegenerator.services.ScheduleService;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/schedule")
@@ -44,5 +48,15 @@ public class ScheduleController {
         ModelAndView mav = new ModelAndView("schedule/new");
         mav.addObject("schedule", new Schedule());
         return mav;
+    }
+
+    @PostMapping("/new")
+    public ModelAndView postCreateSchedule(@Valid Schedule schedule, BindingResult result) {
+        if (result.hasErrors()) {
+            return new ModelAndView("schedule/new");
+        } else {
+            Schedule saved = scheduleService.save(schedule);
+            return new ModelAndView("redirect:" + saved.getId());
+        }
     }
 }
