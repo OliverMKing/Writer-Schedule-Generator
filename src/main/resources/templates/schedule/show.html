@@ -24,7 +24,7 @@
         <tbody>
         <tr th:each="slot : ${schedule.getSlots()}">
             <td th:text="${slot.getDate()}">12-10-1998</td>
-            <td th:text="${slot.getWriter()}">Caleb</td>
+            <td> <a href="#" th:href="@{'/writer/' + ${slot.getWriter().getId()}}" th:text="${slot.getWriter()}" >Caleb</a></td>
             <td th:text="${slot.getEditor()}">Oliver</td>
         </tr>
         </tbody>
