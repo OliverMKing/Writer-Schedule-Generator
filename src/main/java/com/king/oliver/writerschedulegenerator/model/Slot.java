@@ -73,7 +73,18 @@ public class Slot extends BaseEntity implements Comparable<Slot> {
 
     @Override
     public int compareTo(Slot o) {
-        return date.compareTo(o.getDate());
+        int dateCompare = date.compareTo(o.getDate());
+        if (dateCompare != 0) {
+            return dateCompare;
+        }
+
+        int writerCompare = writer.getName().compareTo(o.getWriter().getName());
+        if (writerCompare != 0) {
+            return writerCompare;
+        }
+
+        int editorCompare = editor.getName().compareTo(o.getEditor().getName());
+        return editorCompare;
     }
 
     @Override
