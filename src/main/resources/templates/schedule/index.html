@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Writer Schedule Generator</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <script th:href="@{/webjars/jquery/3.4.0/jquery.min.js} "></script>
+</head>
+<body>
+    <div th:replace="fragments/navbar :: navbar" />
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">List of Schedules</h1>
+        <a class="btn btn-primary float-right m-1" href="/schedule/new" role="button">New Schedule</a>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Show</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="schedule : ${schedules}">
+                <td th:text="${schedule.getName()}">Oliver</td>
+                <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()}}">Show</a></td>
+                <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/update'}")>Edit</a></td>
+                <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this schedule?')">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

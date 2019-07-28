@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Writer Schedule Generator</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <script th:href="@{/webjars/jquery/3.4.0/jquery.min.js} "></script>
+</head>
+<body>
+<div th:replace="fragments/navbar :: navbar" />
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">New Writer</h1>
+
+    <form th:object="${schedule}" th:action="@{'/writer/new'} " method="post" class="text-left">
+        <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+            <p>Please correct the errors below</p>
+        </div>
+
+        <input type="hidden" th:field="*{id}"/>
+        <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}" th:errorclass="has-error"/>
+            <span th:if="${#fields.hasErrors('name')}">
+                <ul class="list-group list-unstyled">
+                    <li class="text-danger" th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
+                </ul>
+            </span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -10,10 +10,10 @@ public class Slot extends BaseEntity implements Comparable<Slot> {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "writer")
+    @OneToOne
     private Writer writer;
 
-    @Column(name = "editor")
+    @OneToOne
     private Editor editor;
 
     @ManyToOne
@@ -60,6 +60,14 @@ public class Slot extends BaseEntity implements Comparable<Slot> {
 
     public void setEditor(Editor editor) {
         this.editor = editor;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 
     @Override

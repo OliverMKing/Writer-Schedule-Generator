@@ -3,10 +3,12 @@ package com.king.oliver.writerschedulegenerator.services.springjpa;
 import com.king.oliver.writerschedulegenerator.model.Schedule;
 import com.king.oliver.writerschedulegenerator.repositories.ScheduleRepository;
 import com.king.oliver.writerschedulegenerator.services.ScheduleService;
+import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class ScheduleJpaService implements ScheduleService {
 
     private final ScheduleRepository scheduleRepository;

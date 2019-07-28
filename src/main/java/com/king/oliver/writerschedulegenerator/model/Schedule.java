@@ -9,17 +9,22 @@ import java.util.TreeSet;
 
 @Entity
 @Table(name = "schedules")
-public class Schedule extends BaseEntity {
+public class Schedule extends Named {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "schedule")
     private Set<Slot> slots = new TreeSet<>();
-
 
     public Schedule() {
     }
 
     public Schedule(Set<Slot> slots) {
         this.slots = slots;
+    }
+
+    public Schedule addSlot(Slot slot) {
+        slot.setSchedule(this);
+        slots.add(slot);
+        return this;
     }
 
     public Set<Slot> getSlots() {
