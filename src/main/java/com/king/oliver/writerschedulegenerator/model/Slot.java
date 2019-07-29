@@ -1,5 +1,7 @@
 package com.king.oliver.writerschedulegenerator.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,6 +11,7 @@ import java.util.Objects;
 public class Slot extends BaseEntity implements Comparable<Slot> {
 
     @Column(name = "date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
     @OneToOne

@@ -4,6 +4,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 

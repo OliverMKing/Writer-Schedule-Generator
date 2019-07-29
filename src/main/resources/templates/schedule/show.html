@@ -11,24 +11,32 @@
 <div th:replace="fragments/navbar :: navbar" />
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4" th:text="${schedule.getName()}">List of Writers</h1>
+    <h1 class="display-4" th:text="${schedule.getName()}">Name</h1>
+    <span th:if="${schedule.getSlots().size() == 0}">
+        <div class="row justify-content-center">
+            <a class="btn btn-primary float-right m-1" href="/writer/new" role="button">Add Slot</a>
+        </div>
+    </span>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Writer</th>
-            <th>Editor</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="slot : ${schedule.getSlots()}">
-            <td th:text="${slot.getDate()}">12-10-1998</td>
-            <td> <a href="#" th:href="@{'/writer/' + ${slot.getWriter().getId()}}" th:text="${slot.getWriter()}" >Caleb</a></td>
-            <td th:text="${slot.getEditor()}">Oliver</td>
-        </tr>
-        </tbody>
-    </table>
+    <span th:if="${schedule.getSlots().size() > 0}">
+    <a class="btn btn-primary float-right m-1" href="/writer/new" role="button">Show Slots</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Writer</th>
+                <th>Editor</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="slot : ${schedule.getSlots()}">
+                <td th:text="${slot.getDate()}">12-10-1998</td>
+                <td> <a href="#" th:href="@{'/writer/' + ${slot.getWriter().getId()}}" th:text="${slot.getWriter()}" >Caleb</a></td>
+                <td th:text="${slot.getEditor()}">Oliver</td>
+            </tr>
+            </tbody>
+        </table>
+    </span>
 
     <div class="row justify-content-center">
         <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/update'}">Edit</a>

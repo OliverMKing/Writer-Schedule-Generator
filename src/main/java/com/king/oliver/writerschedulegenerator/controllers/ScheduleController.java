@@ -1,7 +1,10 @@
 package com.king.oliver.writerschedulegenerator.controllers;
 
 import com.king.oliver.writerschedulegenerator.model.Schedule;
+import com.king.oliver.writerschedulegenerator.model.Slot;
+import com.king.oliver.writerschedulegenerator.services.EditorService;
 import com.king.oliver.writerschedulegenerator.services.ScheduleService;
+import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,15 +14,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/schedule")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
+    private final WriterService writerService;
+    private final EditorService editorService;
 
-    public ScheduleController(ScheduleService scheduleService) {
+    public ScheduleController(ScheduleService scheduleService, WriterService writerService, EditorService editorService) {
         this.scheduleService = scheduleService;
+        this.writerService = writerService;
+        this.editorService = editorService;
     }
 
     @RequestMapping({"", "/"})
@@ -46,14 +54,17 @@ public class ScheduleController {
     @GetMapping("/new")
     public ModelAndView initCreateSchedule() {
         ModelAndView mav = new ModelAndView("schedule/new");
-        mav.addObject("schedule", new Schedule());
+        Schedule schedule = new Schedule();
+        mav.addObject("schedule", schedule);
         return mav;
     }
 
     @PostMapping("/new")
     public ModelAndView postCreateSchedule(@Valid Schedule schedule, BindingResult result) {
         if (result.hasErrors()) {
-            return new ModelAndView("schedule/new");
+            ModelAndView mav = new ModelAndView("schedule/new");
+            mav.addObject(schedule);
+            return mav;
         } else {
             Schedule saved = scheduleService.save(schedule);
             return new ModelAndView("redirect:" + saved.getId());
