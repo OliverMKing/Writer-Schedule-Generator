@@ -11,9 +11,9 @@
 <div th:replace="fragments/navbar :: navbar" />
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Update Writer</h1>
+    <h1 class="display-4">Edit Schedule</h1>
 
-    <form th:object="${writer}" th:action="@{'/writer/' + ${writer.getId()} + '/update'} "method="post" class="text-left">
+    <form th:object="${schedule}" th:action="@{'/schedule/' + ${schedule.getId()} + '/update'} "method="post" class="text-left">
         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
             <p>Please correct the errors below</p>
         </div>
@@ -28,15 +28,7 @@
                 </ul>
             </span>
         </div>
-        <div class="form-group" th:class="${#fields.hasErrors('url')} ? 'form-group has-error' : 'form-group'">
-            <label for="url">Url</label>
-            <input type="text" class="form-control" id="url" placeholder="Url" th:field="*{url}" th:errorclass="has-error"/>
-            <span th:if="${#fields.hasErrors('name')}">
-                <ul class="list-group list-unstyled">
-                    <li class="text-danger" th:each="err : ${#fields.errors('url')}" th:text="${err}"/>
-                </ul>
-            </span>
-        </div>
+
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Update</button>
         </div>

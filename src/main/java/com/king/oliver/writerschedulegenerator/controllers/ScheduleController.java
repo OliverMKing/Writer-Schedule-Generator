@@ -1,5 +1,6 @@
 package com.king.oliver.writerschedulegenerator.controllers;
 
+import com.king.oliver.writerschedulegenerator.model.Editor;
 import com.king.oliver.writerschedulegenerator.model.Schedule;
 import com.king.oliver.writerschedulegenerator.model.Slot;
 import com.king.oliver.writerschedulegenerator.services.EditorService;
@@ -7,10 +8,7 @@ import com.king.oliver.writerschedulegenerator.services.ScheduleService;
 import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -68,6 +66,27 @@ public class ScheduleController {
         } else {
             Schedule saved = scheduleService.save(schedule);
             return new ModelAndView("redirect:" + saved.getId());
+        }
+    }
+
+    @GetMapping("/{scheduleId}/update")
+    public ModelAndView initUpdateSchedule(@PathVariable Long scheduleId) {
+        ModelAndView mav = new ModelAndView("schedule/update");
+        mav.addObject("schedule", scheduleService.findById(scheduleId));
+        return mav;
+    }
+
+    @PostMapping("/{scheduleId}/update")
+    public ModelAndView postUpdateEditor(@Valid Schedule schedule, BindingResult result, @PathVariable Long scheduleId) {
+        if (result.hasErrors()) {
+            ModelAndView mav = new ModelAndView("schedule/update");
+            schedule.setId(scheduleId);
+            mav.addObject(schedule);
+            return mav;
+        } else {
+            schedule.setId(scheduleId);
+            Schedule saved = scheduleService.save(schedule);
+            return new ModelAndView("redirect:/schedule");
         }
     }
 }
