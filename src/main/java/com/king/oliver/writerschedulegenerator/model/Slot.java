@@ -3,6 +3,7 @@ package com.king.oliver.writerschedulegenerator.model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 public class Slot extends BaseEntity implements Comparable<Slot> {
 
     @Column(name = "date")
+    @NotNull(message = "Date cannot be empty")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 

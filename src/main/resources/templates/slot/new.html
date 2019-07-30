@@ -11,58 +11,49 @@
 <div th:replace="fragments/navbar :: navbar" />
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">New Schedule</h1>
+    <h1 class="display-4">New Slot</h1>
 
-    <form th:object="${schedule}" th:action="@{'/schedule/new'} " method="post" class="text-left">
+    <form th:object="${slot}" th:action="@{'/schedule/' + ${schedule.getId()} + '/slot/new'}" method="post" class="text-left">
         <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
             <p>Please correct the errors below</p>
         </div>
 
         <input type="hidden" th:field="*{id}"/>
-        <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name" th:field="*{name}" th:errorclass="has-error"/>
-            <span th:if="${#fields.hasErrors('name')}">
+        <div class="form-group" th:class="${#fields.hasErrors('date')} ? 'form-group has-error' : 'form-group'">
+            <label for="date">Date</label>
+            <input class="form-control" type="date" id="date" th:field="*{date}"/>
+            <span th:if="${#fields.hasErrors('date')}">
                 <ul class="list-group list-unstyled">
-                    <li class="text-danger" th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
+                    <li class="text-danger" th:each="err : ${#fields.errors('date')}" th:text="${err}"/>
                 </ul>
             </span>
         </div>
-
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Date</th>
-                <th>Writer</th>
-                <th>Editor</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="slot, itemStat : *{slots}">
-                <td><input class="form-control" type="date" th:field="*{slots[__${itemStat.index}__].date}"/></td>
-                <td>
-                    <select class="form-control" name="slot.writer" th:field="*{slots[__${itemStat.index}__].writer}">
-                        <option th:each="writer : ${writers}"
-                                th:value="${writer.getId()}"
-                                th:text="${writer.getName()}">Caleb</option>
-                    </select>
-                </td>
-                <td>
-                    <select class="form-control" name="slot.editor" th:field="*{slots[__${itemStat.index}__].editor}">
-                        <option th:each="editor : ${editors}"
-                                th:value="${editor.getId()}"
-                                th:text="${editor.getName()}">Caleb</option>
-                    </select>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <span th:if="${#fields.hasErrors('slots')}">
+        <div class="form-group" th:class="${#fields.hasErrors('writer')} ? 'form-group has-error' : 'form-group'">
+            <label for="writer">Writer</label>
+            <select class="form-control" id="writer" name="slot.writer" th:field="*{writer}">
+                <option th:each="writer : ${writers}"
+                        th:value="${writer.getId()}"
+                        th:text="${writer.getName()}">Caleb</option>
+            </select>
+            <span th:if="${#fields.hasErrors('writer')}">
                 <ul class="list-group list-unstyled">
-                    <li class="text-danger" th:each="err : ${#fields.errors('slots')}" th:text="${err}"/>
+                    <li class="text-danger" th:each="err : ${#fields.errors('writer')}" th:text="${err}"/>
                 </ul>
-        </span>
-
+            </span>
+        </div>
+        <div class="form-group" th:class="${#fields.hasErrors('editor')} ? 'form-group has-error' : 'form-group'">
+            <label for="editor">Editor</label>
+            <select class="form-control" id="editor" name="slot.editor" th:field="*{editor}">
+                <option th:each="editor : ${editors}"
+                        th:value="${editor.getId()}"
+                        th:text="${editor.getName()}">Oliver</option>
+            </select>
+            <span th:if="${#fields.hasErrors('editor')}">
+                <ul class="list-group list-unstyled">
+                    <li class="text-danger" th:each="err : ${#fields.errors('editor')}" th:text="${err}"/>
+                </ul>
+            </span>
+        </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Create</button>
         </div>

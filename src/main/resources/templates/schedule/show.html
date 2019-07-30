@@ -14,12 +14,12 @@
     <h1 class="display-4" th:text="${schedule.getName()}">Name</h1>
     <span th:if="${schedule.getSlots().size() == 0}">
         <div class="row justify-content-center">
-            <a class="btn btn-primary float-right m-1" href="/writer/new" role="button">Add Slot</a>
+            <a class="btn btn-primary float-right m-1" th:href="@{'/schedule/' + ${schedule.getId()} + '/slot/new'}" href="/schedule/new" role="button">Add Slot</a>
         </div>
     </span>
 
     <span th:if="${schedule.getSlots().size() > 0}">
-    <a class="btn btn-primary float-right m-1" href="/writer/new" role="button">Add Slot</a>
+    <a class="btn btn-primary float-right m-1" th:href="@{'/schedule/' + ${schedule.getId()} + '/slot/new'}" href="/writer/new" role="button">Add Slot</a>
         <table class="table table-striped">
             <thead>
             <tr>
