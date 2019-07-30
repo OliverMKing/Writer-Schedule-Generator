@@ -1,25 +1,25 @@
 package com.king.oliver.writerschedulegenerator.model;
 
+import org.hibernate.annotations.SortNatural;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 @Entity
 @Table(name = "schedules")
 public class Schedule extends Named {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "schedule")
-    private Set<Slot> slots = new TreeSet<>();
+    @SortNatural
+    private SortedSet<Slot> slots = new TreeSet<>();
 
     public Schedule() {
     }
 
-    public Schedule(Set<Slot> slots) {
+    public Schedule(SortedSet<Slot> slots) {
         this.slots = slots;
     }
 
@@ -29,11 +29,11 @@ public class Schedule extends Named {
         return this;
     }
 
-    public Set<Slot> getSlots() {
+    public SortedSet<Slot> getSlots() {
         return slots;
     }
 
-    public void setSlots(Set<Slot> slots) {
+    public void setSlots(SortedSet<Slot> slots) {
         this.slots = slots;
     }
 }
