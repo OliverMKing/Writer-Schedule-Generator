@@ -30,6 +30,12 @@ public class SlotController {
         this.editorService = editorService;
     }
 
+    @GetMapping("/schedule/{scheduleId}/slot/{slotId}/delete")
+    public String deleteSlot(@PathVariable Long scheduleId, @PathVariable Long slotId) {
+        slotService.deleteById(slotId);
+        return "redirect:/schedule/" + scheduleId;
+    }
+
     @GetMapping("/schedule/{scheduleId}/slot/new")
     public ModelAndView initCreateSlot(@PathVariable Long scheduleId) {
         ModelAndView mav = new ModelAndView("slot/new");
