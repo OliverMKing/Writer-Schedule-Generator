@@ -58,6 +58,24 @@
             <button type="submit" class="btn btn-primary">Create</button>
         </div>
     </form>
+
+    <h1 class="display-4">Current Schedule</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Writer</th>
+            <th>Editor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="slot : ${schedule.getSlots()}">
+            <td th:text="${slot.getDate()}">12-10-1998</td>
+            <td> <a href="#" th:href="@{'/writer/' + ${slot.getWriter().getId()}}" th:text="${slot.getWriter()}" >Caleb</a></td>
+            <td th:text="${slot.getEditor()}">Oliver</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
