@@ -26,6 +26,7 @@
                 <th>Date</th>
                 <th>Writer</th>
                 <th>Editor</th>
+                <th>Edit</th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +34,7 @@
                 <td th:text="${slot.getDate()}">12-10-1998</td>
                 <td> <a href="#" th:href="@{'/writer/' + ${slot.getWriter().getId()}}" th:text="${slot.getWriter()}" >Caleb</a></td>
                 <td th:text="${slot.getEditor()}">Oliver</td>
+                <td> <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/slot/' + ${slot.getId()} + '/update'}" >Edit</a></td>
             </tr>
             </tbody>
         </table>
