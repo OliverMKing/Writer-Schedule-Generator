@@ -19,7 +19,8 @@
             <tr>
                 <th>Name</th>
                 <th>Show</th>
-                <th>Edit</th>
+                <th>Export</th>
+                <th>Edit Name</th>
                 <th>Delete</th>
             </tr>
             </thead>
@@ -27,7 +28,8 @@
             <tr th:each="schedule : ${schedules}">
                 <td th:text="${schedule.getName()}">Oliver</td>
                 <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()}}">Show</a></td>
-                <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/update'}")>Edit</a></td>
+                <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/export'}")>Export</a></td>
+                <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/update'}")>Edit Name</a></td>
                 <td><a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this schedule?')">Delete</a></td>
             </tr>
             </tbody>

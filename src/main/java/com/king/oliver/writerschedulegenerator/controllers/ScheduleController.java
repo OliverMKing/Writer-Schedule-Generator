@@ -43,6 +43,13 @@ public class ScheduleController {
         return mav;
     }
 
+    @GetMapping("/{scheduleId}/export")
+    public ModelAndView exportSchedule(@PathVariable Long scheduleId) {
+        ModelAndView mav = new ModelAndView("schedule/export");
+        mav.addObject("schedule", scheduleService.findById(scheduleId));
+        return mav;
+    }
+
     @GetMapping("/{scheduleId}/delete")
     public String deleteSchedule(@PathVariable Long scheduleId) {
         scheduleService.deleteById(scheduleId);

@@ -41,7 +41,9 @@
             </tbody>
         </table>
     </span>
-
+    <div class="row justify-content-center">
+        <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/export'}">Export</a>
+    </div>
     <div class="row justify-content-center">
         <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/update'}">Edit Name</a>
     </div>

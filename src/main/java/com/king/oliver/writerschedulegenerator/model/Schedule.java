@@ -40,8 +40,9 @@ public class Schedule extends Named {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(getName());
         for (Slot slot : slots) {
-            String line = String.format("%s: %s - %s", slot.getDate(), slot.getWriter(), slot.getEditor());
+            String line = String.format("\n%s: %s - %s", slot.getDate(), slot.getWriter(), slot.getEditor());
             stringBuilder.append(line);
         }
         return stringBuilder.toString();
