@@ -33,17 +33,17 @@
             <tbody>
             <tr th:each="slot : ${schedule.getSlots()}">
                 <td th:text="${slot.getDate()}">12-10-1998</td>
-                <td> <a href="#" th:href="@{'/writer/' + ${slot.getWriter().getId()}}" th:text="${slot.getWriter()}" >Caleb</a></td>
+                <td> <a href="#" th:href="@{'/writer/' + ${slot.getWriter().getId()}}" th:text="${slot.getWriter()}">Caleb</a></td>
                 <td th:text="${slot.getEditor()}">Oliver</td>
-                <td> <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/slot/' + ${slot.getId()} + '/update'}" >Edit</a></td>
-                <td> <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/slot/' + ${slot.getId()} + '/delete'}" >Delete</a></td>
+                <td> <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/slot/' + ${slot.getId()} + '/update'}">Edit</a></td>
+                <td> <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/slot/' + ${slot.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this slot?')">Delete</a></td>
             </tr>
             </tbody>
         </table>
     </span>
 
     <div class="row justify-content-center">
-        <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/update'}">Edit</a>
+        <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/update'}">Edit Name</a>
     </div>
     <div class="row justify-content-center">
         <a href="#" th:href="@{'/schedule/' + ${schedule.getId()} + '/delete'}" onclick="return confirm('Are you sure you want to delete this schedule?')">Delete</a>

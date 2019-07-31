@@ -36,4 +36,14 @@ public class Schedule extends Named {
     public void setSlots(SortedSet<Slot> slots) {
         this.slots = slots;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Slot slot : slots) {
+            String line = String.format("%s: %s - %s", slot.getDate(), slot.getWriter(), slot.getEditor());
+            stringBuilder.append(line);
+        }
+        return stringBuilder.toString();
+    }
 }
