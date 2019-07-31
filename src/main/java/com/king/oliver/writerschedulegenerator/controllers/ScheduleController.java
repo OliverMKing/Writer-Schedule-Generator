@@ -8,6 +8,7 @@ import com.king.oliver.writerschedulegenerator.services.ScheduleService;
 import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,6 +55,11 @@ public class ScheduleController {
     public String deleteSchedule(@PathVariable Long scheduleId) {
         scheduleService.deleteById(scheduleId);
         return "redirect:/schedule";
+    }
+
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("id");
     }
 
     @GetMapping("/new")

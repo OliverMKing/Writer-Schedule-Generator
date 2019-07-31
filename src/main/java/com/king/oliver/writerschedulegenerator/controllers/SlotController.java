@@ -8,7 +8,9 @@ import com.king.oliver.writerschedulegenerator.services.SlotService;
 import com.king.oliver.writerschedulegenerator.services.WriterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +36,11 @@ public class SlotController {
     public String deleteSlot(@PathVariable Long scheduleId, @PathVariable Long slotId) {
         slotService.deleteById(slotId);
         return "redirect:/schedule/" + scheduleId;
+    }
+
+    @InitBinder
+    public void setAllowedFields(WebDataBinder dataBinder) {
+        dataBinder.setDisallowedFields("id");
     }
 
     @GetMapping("/schedule/{scheduleId}/slot/new")
