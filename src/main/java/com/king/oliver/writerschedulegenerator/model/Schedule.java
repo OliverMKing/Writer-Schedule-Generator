@@ -19,8 +19,9 @@ public class Schedule extends Named {
     public Schedule() {
     }
 
-    public Schedule(SortedSet<Slot> slots) {
+    public Schedule(SortedSet<Slot> slots, String name) {
         this.slots = slots;
+        this.setName(name);
     }
 
     public Schedule addSlot(Slot slot) {

@@ -38,8 +38,7 @@ public class ScheduleJpaServiceTest {
         TreeSet<Slot> slots = new TreeSet<>();
         slots.add(slot);
         slots.add(slot2);
-        schedule = new Schedule(slots);
-        schedule.setName("Test Schedule");
+        schedule = new Schedule(slots, "Test Schedule");
         schedule.setId(1L);
         MockitoAnnotations.initMocks(this);
     }

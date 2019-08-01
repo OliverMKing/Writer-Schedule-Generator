@@ -34,7 +34,6 @@ public class WriterControllerTest {
     WriterController writerController;
 
     private MockMvc mockMvc;
-
     private Set<Writer> writers;
     private Writer writer;
 
