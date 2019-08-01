@@ -1,6 +1,5 @@
 package com.king.oliver.writerschedulegenerator.services.springjpa;
 
-import com.king.oliver.writerschedulegenerator.model.Editor;
 import com.king.oliver.writerschedulegenerator.model.Writer;
 import com.king.oliver.writerschedulegenerator.repositories.WriterRepository;
 import org.junit.Before;
