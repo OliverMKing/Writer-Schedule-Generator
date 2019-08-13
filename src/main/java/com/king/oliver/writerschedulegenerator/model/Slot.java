@@ -16,10 +16,10 @@ public class Slot extends BaseEntity implements Comparable<Slot> {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate date;
 
-    @OneToOne
+    @OneToOne()
     private Writer writer;
 
-    @OneToOne
+    @OneToOne()
     private Editor editor;
 
     @ManyToOne
