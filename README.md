@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/OliverMKing/Writer-Schedule-Generator.svg?style=svg)](https://circleci.com/gh/OliverMKing/Writer-Schedule-Generator)
 # Writer-Schedule-Generator
 A Spring Boot full stack webapp that simplifies the writer scheduling creation process. 
 
